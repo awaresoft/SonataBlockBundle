@@ -1,0 +1,11 @@
+{
+    "name": "awaresoft/SonataBlockBundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Awaresoft SonataBlockBundle",
+    "require": {
+        "php": ">= 7",
+        "symfony/symfony": "2.*"
+    },"autoload": {
+    "psr-4": { "Awaresoft\\SonataBlockBundle\\": "" }
+}
+}
