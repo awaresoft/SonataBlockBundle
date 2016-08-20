@@ -1,5 +1,5 @@
 {
-    "name": "awaresoft/SonataBlockBundle",
+    "name": "awaresoft/sonata-block-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Awaresoft SonataBlockBundle",
     "require": {
