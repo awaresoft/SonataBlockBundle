@@ -2,5 +2,32 @@
 
 
 {% block block %}
-    <div class="lazy-load-block" data-id="{{ block.id }}" data-parameters='{{ parameters }}'></div>
+    <div class="lazy-load-block" data-id="{{ block.id }}"></div>
+
+    <script>
+        $(document).ready(function () {
+            {#console.log('ready block: {{ block.id }}');#}
+            var $lazyBlockId = $('.lazy-load-block[data-id="{{ block.id }}"]'),
+                    parameters = {{ parameters |raw }};
+
+            Main.ajax(response, Routing.generate('awaresoft_sonata_block_ajax_render', {
+                'id': {{ block.id }}
+            }));
+
+            function response(response) {
+                if (response.status == 200) {
+                    {#console.log('ready response block: {{ block.id }}');#}
+                    var data = ($.parseJSON(response.responseText));
+                    $(data.html).insertAfter($lazyBlockId.parent());
+                    $lazyBlockId.remove();
+                    $('#cms-block-' + {{ block.id }} +':first').remove();
+
+                    if (parameters.callback !== undefined) {
+//                        console.log('callback');
+                        eval(parameters.callback);
+                    }
+                }
+            }
+        });
+    </script>
 {% endblock %}
