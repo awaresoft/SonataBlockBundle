@@ -2,8 +2,8 @@
 
 namespace Awaresoft\Sonata\BlockBundle\Block;
 
-use Sonata\BlockBundle\Block\BaseBlockService as SonataBaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Bartosz Malec <b.malec@awaresoft.pl>
  */
-abstract class BaseBlockService extends SonataBaseBlockService
+abstract class BaseBlockService extends AbstractBlockService
 {
     /**
      * @var ContainerInterface
@@ -37,7 +37,7 @@ abstract class BaseBlockService extends SonataBaseBlockService
         parent::__construct($name, $templating);
 
         $this->container = $container;
-        $this->request = $container->get('request');
+        $this->request = $container->get('request_stack')->getCurrentRequest();
     }
 
     /**
